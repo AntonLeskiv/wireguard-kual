@@ -5,8 +5,8 @@
 > Run a full WireGuard VPN tunnel on your Kindle — no kernel modules required.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Build](https://img.shields.io/github/actions/workflow/status/YOUR_USER/kindle-wireguard-kual/release.yml?label=build)](https://github.com/YOUR_USER/kindle-wireguard-kual/actions)
-[![Release](https://img.shields.io/github/v/release/YOUR_USER/kindle-wireguard-kual)](https://github.com/YOUR_USER/kindle-wireguard-kual/releases/latest)
+[![Build](https://img.shields.io/github/actions/workflow/status/AntonLeskiv/kindle-wireguard-kual/release.yml?label=build)](https://github.com/AntonLeskiv/kindle-wireguard-kual/actions)
+[![Release](https://img.shields.io/github/v/release/AntonLeskiv/kindle-wireguard-kual)](https://github.com/AntonLeskiv/kindle-wireguard-kual/releases/latest)
 
 ---
 
@@ -59,7 +59,7 @@ Compatible with any **jailbroken Kindle with KUAL** running **ARMv7 (`armhf`)** 
 
 ### Quick Install (End User)
 
-1. **Download** `kindle-wireguard-kual.zip` from the [Releases](https://github.com/YOUR_USER/kindle-wireguard-kual/releases/latest) page.
+1. **Download** `kindle-wireguard-kual.zip` from the [Releases](https://github.com/AntonLeskiv/kindle-wireguard-kual/releases/latest) page.
 2. **Connect** your Kindle via USB.
 3. **Extract** the zip into the Kindle's root — the `wireguard/` folder should end up at:
    ```
@@ -222,7 +222,7 @@ Compatible con cualquier **Kindle con jailbreak y KUAL** que ejecute espacio de 
 
 ### Instalación Rápida (Usuario Final)
 
-1. **Descarga** `kindle-wireguard-kual.zip` desde la página de [Releases](https://github.com/YOUR_USER/kindle-wireguard-kual/releases/latest).
+1. **Descarga** `kindle-wireguard-kual.zip` desde la página de [Releases](https://github.com/AntonLeskiv/kindle-wireguard-kual/releases/latest).
 2. **Conecta** tu Kindle por USB.
 3. **Extrae** el zip en la raíz del Kindle — la carpeta `wireguard/` debe quedar en:
    ```
