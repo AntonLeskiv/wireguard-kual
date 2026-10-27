@@ -1,0 +1,18 @@
+[Interface]
+# IP asignada a tu Kindle dentro de la VPN
+Address = 10.0.0.2/24
+PrivateKey = PEGA_AQUI_TU_CLAVE_PRIVADA
+MTU = 1420
+
+[Peer]
+PublicKey = PEGA_AQUI_LA_CLAVE_PUBLICA_DEL_SERVIDOR
+Endpoint = vpn.tudominio.com:51820
+
+# MODO SPLIT-TUNNEL (Recomendado para KOReader, Calibre-Web, Syncthing o NAS local):
+# Enruta solo el trafico hacia tu subred VPN y tu LAN domestica sin alterar la navegacion general.
+AllowedIPs = 10.0.0.0/24, 192.168.1.0/24
+
+# MODO FULL-TUNNEL (Para enrutar absolutamente todo el trafico de internet por la VPN):
+# AllowedIPs = 0.0.0.0/0
+
+PersistentKeepalive = 25

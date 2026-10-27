@@ -1,0 +1,41 @@
+name: Build and Release Kindle KUAL Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Install ARMv7 Cross-Compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-linux-gnueabihf make zip
+
+      - name: Build Binaries and Package
+        run: make all
+
+      - name: Generate SHA256 Checksum
+        run: sha256sum kindle-wireguard-kual.zip > kindle-wireguard-kual.zip.sha256
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            kindle-wireguard-kual.zip
+            kindle-wireguard-kual.zip.sha256
+          generate_release_notes: true

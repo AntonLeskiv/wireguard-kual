@@ -1,0 +1,34 @@
+{
+    "items": [
+        {
+            "name": "WireGuard VPN",
+            "priority": 1,
+            "items": [
+                {
+                    "name": "▶ Conectar VPN",
+                    "priority": 1,
+                    "action": "/bin/sh /mnt/us/extensions/wireguard/bin/wg-control.sh up",
+                    "exitmenu": false
+                },
+                {
+                    "name": "■ Desconectar VPN",
+                    "priority": 2,
+                    "action": "/bin/sh /mnt/us/extensions/wireguard/bin/wg-control.sh down",
+                    "exitmenu": false
+                },
+                {
+                    "name": "ℹ Estado del Tunel",
+                    "priority": 3,
+                    "action": "/bin/sh /mnt/us/extensions/wireguard/bin/wg-control.sh status",
+                    "exitmenu": false
+                },
+                {
+                    "name": "📄 Ver Ultimo Log",
+                    "priority": 4,
+                    "action": "/bin/sh /mnt/us/extensions/wireguard/bin/wg-control.sh log",
+                    "exitmenu": false
+                }
+            ]
+        }
+    ]
+}
