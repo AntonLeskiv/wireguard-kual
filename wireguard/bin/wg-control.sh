@@ -87,22 +87,31 @@ start_wg() {
     ip addr add "$WG_ADDR" dev "$IFACE" >> "$LOG_FILE" 2>&1
     ip link set mtu "$WG_MTU" up dev "$IFACE" >> "$LOG_FILE" 2>&1
 
+    # Desactivar rp_filter para permitir tráfico asimétrico en wg0
+    echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter 2>/dev/null
+    echo 0 > /proc/sys/net/ipv4/conf/"$IFACE"/rp_filter 2>/dev/null
+
     for cidr in $ALLOWED_IPS; do
         case "$cidr" in
             *:*) continue ;;
             0.0.0.0/0)
                 ENDPOINT_IP=$("$TMP_DIR/wg" show "$IFACE" endpoints | awk '{print $2}' | cut -d ':' -f 1 | head -n 1)
-                DEFAULT_GW=$(ip route show default | awk '/default/ {print $3}' | head -n 1)
-                DEFAULT_DEV=$(ip route show default | awk '/default/ {print $5}' | head -n 1)
+                DEFAULT_GW=$(ip route show default 2>/dev/null | awk '/default/ {print $3}' | head -n 1)
+                [ -z "$DEFAULT_GW" ] && DEFAULT_GW=$(route -n 2>/dev/null | awk '/^0.0.0.0/ {print $2}' | head -n 1)
+                DEFAULT_DEV=$(ip route show default 2>/dev/null | awk '/default/ {print $5}' | head -n 1)
+                [ -z "$DEFAULT_DEV" ] && DEFAULT_DEV=$(route -n 2>/dev/null | awk '/^0.0.0.0/ {print $8}' | head -n 1)
                 if [ -n "$ENDPOINT_IP" ] && [ -n "$DEFAULT_GW" ] && [ -n "$DEFAULT_DEV" ]; then
-                    ip route add "$ENDPOINT_IP/32" via "$DEFAULT_GW" dev "$DEFAULT_DEV" 2>/dev/null
+                    (ip route add "$ENDPOINT_IP/32" via "$DEFAULT_GW" dev "$DEFAULT_DEV" 2>/dev/null || route add -host "$ENDPOINT_IP" gw "$DEFAULT_GW" dev "$DEFAULT_DEV" 2>/dev/null)
                     echo "$ENDPOINT_IP/32" > "$ENDPOINT_ROUTE_FILE"
-                    ip route add 0.0.0.0/1 dev "$IFACE" 2>/dev/null
-                    ip route add 128.0.0.0/1 dev "$IFACE" 2>/dev/null
+                    (ip route add 0.0.0.0/1 dev "$IFACE" 2>/dev/null || route add -net 0.0.0.0/1 dev "$IFACE" 2>/dev/null)
+                    (ip route add 128.0.0.0/1 dev "$IFACE" 2>/dev/null || route add -net 128.0.0.0/1 dev "$IFACE" 2>/dev/null)
                 fi
                 ;;
             *)
-                ip route add "$cidr" dev "$IFACE" 2>/dev/null
+                echo "Configurando ruta para $cidr..." >> "$LOG_FILE"
+                if ! ip route add "$cidr" dev "$IFACE" >> "$LOG_FILE" 2>&1; then
+                    route add -net "$cidr" dev "$IFACE" >> "$LOG_FILE" 2>&1
+                fi
                 ;;
         esac
     done
@@ -152,9 +161,12 @@ status_wg() {
 
 show_log() {
     if [ -f "$LOG_FILE" ]; then
-        LAST_LINE=$(tail -n 1 "$LOG_FILE" | cut -c 1-48)
+        L1=$(tail -n 2 "$LOG_FILE" | head -n 1 | cut -c 1-48)
+        L2=$(tail -n 1 "$LOG_FILE" | cut -c 1-48)
+        eips 1 37 "                                                  " >/dev/null 2>&1
+        eips 2 37 "$L1" >/dev/null 2>&1
         eips 1 38 "                                                  " >/dev/null 2>&1
-        eips 2 38 "$LAST_LINE" >/dev/null 2>&1
+        eips 2 38 "$L2" >/dev/null 2>&1
     else
         eink_msg "WG Log: Archivo vacio"
     fi
