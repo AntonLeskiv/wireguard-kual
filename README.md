@@ -1,12 +1,12 @@
-# kindle-wireguard-kual
+# wireguard-kual
 
 **WireGuard VPN client for jailbroken Amazon Kindle devices via KUAL**
 
 > Run a full WireGuard VPN tunnel on your Kindle — no kernel modules required.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Build](https://img.shields.io/github/actions/workflow/status/AntonLeskiv/kindle-wireguard-kual/release.yml?label=build)](https://github.com/AntonLeskiv/kindle-wireguard-kual/actions)
-[![Release](https://img.shields.io/github/v/release/AntonLeskiv/kindle-wireguard-kual)](https://github.com/AntonLeskiv/kindle-wireguard-kual/releases/latest)
+[![Build](https://img.shields.io/github/actions/workflow/status/AntonLeskiv/wireguard-kual/release.yml?label=build)](https://github.com/AntonLeskiv/wireguard-kual/actions)
+[![Release](https://img.shields.io/github/v/release/AntonLeskiv/wireguard-kual)](https://github.com/AntonLeskiv/wireguard-kual/releases/latest)
 
 ---
 
@@ -18,7 +18,7 @@
 
 ### What is this?
 
-`kindle-wireguard-kual` is a [KUAL (Kindle Unified Application Launcher)](https://www.mobileread.com/forums/showthread.php?t=203326) extension that runs a **userspace WireGuard VPN client** on jailbroken Amazon Kindle e-readers.
+`wireguard-kual` is a [KUAL (Kindle Unified Application Launcher)](https://www.mobileread.com/forums/showthread.php?t=203326) extension that runs a **userspace WireGuard VPN client** on jailbroken Amazon Kindle e-readers.
 
 It uses [`wireguard-go`](https://git.zx2c4.com/wireguard-go) (the official Go userspace implementation) and [`wg`](https://git.zx2c4.com/wireguard-tools) (the standard configuration tool), both statically cross-compiled for **ARMv7 (`armhf`)** — no kernel module compilation or kernel headers are needed.
 
@@ -59,7 +59,7 @@ Compatible with any **jailbroken Kindle with KUAL** running **ARMv7 (`armhf`)** 
 
 ### Quick Install (End User)
 
-1. **Download** `kindle-wireguard-kual.zip` from the [Releases](https://github.com/AntonLeskiv/kindle-wireguard-kual/releases/latest) page.
+1. **Download** `wireguard-kual.zip` from the [Releases](https://github.com/AntonLeskiv/wireguard-kual/releases/latest) page.
 2. **Connect** your Kindle via USB.
 3. **Extract** the zip into the Kindle's root — the `wireguard/` folder should end up at:
    ```
@@ -130,7 +130,7 @@ make all
 This will:
 1. Clone and cross-compile `wireguard-go` (static, `GOOS=linux GOARCH=arm GOARM=7`).
 2. Clone and cross-compile `wg` (static, via `arm-linux-gnueabihf-gcc`).
-3. Package everything into `kindle-wireguard-kual.zip`.
+3. Package everything into `wireguard-kual.zip`.
 
 #### Verify binaries
 
@@ -181,7 +181,7 @@ file wireguard/bin/wg
 
 ### ¿Qué es esto?
 
-`kindle-wireguard-kual` es una extensión para [KUAL (Kindle Unified Application Launcher)](https://www.mobileread.com/forums/showthread.php?t=203326) que ejecuta un **cliente VPN WireGuard en espacio de usuario** en dispositivos Amazon Kindle con jailbreak.
+`wireguard-kual` es una extensión para [KUAL (Kindle Unified Application Launcher)](https://www.mobileread.com/forums/showthread.php?t=203326) que ejecuta un **cliente VPN WireGuard en espacio de usuario** en dispositivos Amazon Kindle con jailbreak.
 
 Utiliza [`wireguard-go`](https://git.zx2c4.com/wireguard-go) (la implementación oficial en Go para espacio de usuario) y [`wg`](https://git.zx2c4.com/wireguard-tools) (la herramienta de configuración estándar), ambos compilados estáticamente para **ARMv7 (`armhf`)** — no se necesita compilar módulos del kernel ni tener cabeceras del kernel.
 
@@ -222,7 +222,7 @@ Compatible con cualquier **Kindle con jailbreak y KUAL** que ejecute espacio de 
 
 ### Instalación Rápida (Usuario Final)
 
-1. **Descarga** `kindle-wireguard-kual.zip` desde la página de [Releases](https://github.com/AntonLeskiv/kindle-wireguard-kual/releases/latest).
+1. **Descarga** `wireguard-kual.zip` desde la página de [Releases](https://github.com/AntonLeskiv/wireguard-kual/releases/latest).
 2. **Conecta** tu Kindle por USB.
 3. **Extrae** el zip en la raíz del Kindle — la carpeta `wireguard/` debe quedar en:
    ```
@@ -293,7 +293,7 @@ make all
 Esto hará:
 1. Clonar y compilar `wireguard-go` (estático, `GOOS=linux GOARCH=arm GOARM=7`).
 2. Clonar y compilar `wg` (estático, vía `arm-linux-gnueabihf-gcc`).
-3. Empaquetar todo en `kindle-wireguard-kual.zip`.
+3. Empaquetar todo en `wireguard-kual.zip`.
 
 #### Verificar binarios
 

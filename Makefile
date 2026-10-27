@@ -25,7 +25,7 @@ wg:
 
 package:
 	chmod +x $(EXT_BIN_DIR)/wg-control.sh
-	zip -r kindle-wireguard-kual.zip wireguard/ -x "*/.gitkeep"
+	zip -r wireguard-kual.zip wireguard/ -x "*/.gitkeep"
 
 clean:
-	rm -rf $(BUILD_DIR) $(EXT_BIN_DIR)/wireguard-go $(EXT_BIN_DIR)/wg kindle-wireguard-kual.zip
+	rm -rf $(BUILD_DIR) $(EXT_BIN_DIR)/wireguard-go $(EXT_BIN_DIR)/wg wireguard-kual.zip

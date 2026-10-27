@@ -4,7 +4,7 @@
         <name>WireGuard VPN</name>
         <version>1.0.0</version>
         <author>Anton</author>
-        <id>kindle-wireguard-kual</id>
+        <id>wireguard-kual</id>
     </information>
     <menus>
         <menu type="json" dynamic="true">menu.json</menu>

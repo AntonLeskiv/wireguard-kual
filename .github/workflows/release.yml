@@ -29,13 +29,13 @@ jobs:
         run: make all
 
       - name: Generate SHA256 Checksum
-        run: sha256sum kindle-wireguard-kual.zip > kindle-wireguard-kual.zip.sha256
+        run: sha256sum wireguard-kual.zip > wireguard-kual.zip.sha256
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            kindle-wireguard-kual.zip
-            kindle-wireguard-kual.zip.sha256
+            wireguard-kual.zip
+            wireguard-kual.zip.sha256
           generate_release_notes: true
